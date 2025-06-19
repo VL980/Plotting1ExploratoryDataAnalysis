@@ -1,0 +1,14 @@
+# Producing the histogram of Global Active Power (plot 1)
+library(dplyr)
+data <- read.table("exdata_data_household_power_consumption/household_power_consumption.txt", sep = ";", header = TRUE,)
+data$Date <- as.Date(data$Date, format = "%d/%m/%Y")
+data$Date <- as.Date(data$Date, format = "%Y-%m-%d")
+names(data) <- gsub("_"," ", names(data))
+final_data$`Global active power` <- as.numeric(final_data$`Global active power`)
+#separating out the dates that are not of interest.
+final_data <- data %>% filter(Date == "2007-02-01"| Date == "2007-02-02")
+png("plot1.png", width = 480, height = 480)
+hist(final_data$`Global active power`, col = "red", xlab = "Global Active Power (kilowatts)", ylab = "Frequency", main = "Global Active Power")
+dev.off()
+
+
